@@ -28,7 +28,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', 'Noto Sans', serif, sans-serif;
+	font-weight: 300;
 }
 ol, ul, li {
 	list-style: none;
@@ -48,6 +49,9 @@ table {
 a {
     text-decoration: none;
     color: inherit;
+}
+input, textarea {
+	font-family: 'Noto Sans KR', 'Noto Sans', serif, sans-serif;
 }
 * {
     box-sizing: border-box;

@@ -12,8 +12,6 @@ interface BoardProps {
 }
 
 const Board = ({ boardId, toDos }: BoardProps) => {
-  console.log(toDos);
-
   const [isClicked, setIsClicked] = useState(false);
   const onClickPlusBtn = (e: React.MouseEvent<SVGSVGElement>) => {
     setIsClicked((prev) => !prev);

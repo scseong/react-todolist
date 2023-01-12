@@ -13,13 +13,16 @@ interface TaskProps {
 
 const Task = ({ id, text, boardId }: TaskProps) => {
   const setToDos = useSetRecoilState(toDoState);
-  const onClick = (e: React.MouseEvent<SVGSVGElement>) => {
-    setToDos((allBoards) => {
-      const boardCopy = [...allBoards[boardId]];
-      const newBoard = boardCopy.filter((toDos) => toDos.id !== id);
-      return { ...allBoards, [boardId]: [...newBoard] };
-    });
+  const onClick = () => {
+    if (window.confirm('This will remove this task from board')) {
+      setToDos((allBoards) => {
+        const boardCopy = [...allBoards[boardId]];
+        const updateBoard = boardCopy.filter((toDos) => toDos.id !== id);
+        return { ...allBoards, [boardId]: [...updateBoard] };
+      });
+    }
   };
+
   return (
     <>
       <Note>

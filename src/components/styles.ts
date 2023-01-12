@@ -37,7 +37,7 @@ export const HeaderBtn = styled.button`
   border: none;
   cursor: pointer;
   &:hover {
-    color: #218bff;
+    color: ${(props) => props.theme.colors['btn-hover']};
   }
 `;
 
@@ -51,14 +51,18 @@ export const BoardContent = styled.div`
 export const FormContent = styled(BoardContent)`
   padding: 12px 10px;
 `;
-export const FormBtn = styled.button<{ primary?: boolean }>`
+export const FormBtn = styled.button<{ submit?: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   cursor: pointer;
-  background-color: ${(props) => (props.primary ? '#2da44e' : 'inherit')};
-  color: ${(props) => (props.primary ? 'white' : 'inherit')};
+  background-color: ${(props) =>
+    props.submit ? props.theme.colors['form-submit-btn-bg'] : 'inherit'};
+  color: ${(props) => (props.submit ? 'white' : 'inherit')};
   &:hover {
-    background-color: ${(props) => (props.primary ? '#2c974b' : '#f3f4f6;')};
+    background-color: ${(props) =>
+      props.submit
+        ? props.theme.colors['form-submit-btn-bg-hover']
+        : props.theme.colors['form-btn-bg-hover']};
   }
 `;
 
@@ -71,7 +75,7 @@ export const TaskForm = styled.div`
       padding: 8px 12px;
       border-radius: 5px;
       &:focus {
-        outline-color: #218bff;
+        outline-color: ${(props) => props.theme.colors['border-outline']};
       }
     }
     div {
@@ -96,16 +100,21 @@ export const Note = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: space-between;
+  min-height: 80px;
   word-wrap: break-word;
-  height: 60px;
+  line-height: 1.5em;
   span {
     width: 95%;
+    height: fit-content;
   }
   svg {
     width: 5%;
+    &:hover {
+      color: ${(props) => props.theme.colors['btn-hover']};
+    }
   }
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
+    box-shadow: ${(props) => props.theme.colors['card-shadow']};
     cursor: pointer;
   }
 `;

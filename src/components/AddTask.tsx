@@ -32,7 +32,7 @@ const AddTask = ({ boardId }: IFormProps) => {
           rows={5}
         />
         <div>
-          <FormBtn type="submit" primary>
+          <FormBtn type="submit" submit>
             Submit
           </FormBtn>
           <FormBtn>Cancel</FormBtn>
