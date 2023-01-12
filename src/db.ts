@@ -1,8 +1,16 @@
 export interface IToDoState {
-  [key: string]: ITodo[];
+  [key: string]: IToDo[];
 }
 
-export interface ITodo {
+export interface IToDo {
   id: number;
   text: string;
+}
+
+export interface IFormProps {
+  [boardId: string]: string;
+}
+
+export interface IForm {
+  toDo: string;
 }
