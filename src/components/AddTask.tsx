@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { spawn } from 'child_process';
+import React, { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 import { IForm, IFormProps } from '../db';
@@ -27,7 +28,7 @@ const AddTask = ({ boardId }: IFormProps) => {
     <TaskForm>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register('toDo', { required: true })}
+          {...register('toDo', { required: true, maxLength: 150 })}
           placeholder="Add a task"
           rows={5}
         />
@@ -42,4 +43,4 @@ const AddTask = ({ boardId }: IFormProps) => {
   );
 };
 
-export default AddTask;
+export default memo(AddTask);

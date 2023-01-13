@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import * as S from './styles';
 import Task from './Task';
 import AddTask from './AddTask';
 import { IToDo } from '../db';
+import { Droppable } from 'react-beautiful-dnd';
 
 interface BoardProps {
   boardId: string;
@@ -13,7 +14,7 @@ interface BoardProps {
 
 const Board = ({ boardId, toDos }: BoardProps) => {
   const [isClicked, setIsClicked] = useState(false);
-  const onClickPlusBtn = (e: React.MouseEvent<SVGSVGElement>) => {
+  const onClickPlusBtn = () => {
     setIsClicked((prev) => !prev);
   };
 
@@ -34,13 +35,28 @@ const Board = ({ boardId, toDos }: BoardProps) => {
           <AddTask boardId={boardId} />
         </S.FormContent>
       )}
-      <S.BoardContent>
-        {toDos.map((toDo: IToDo) => (
-          <Task key={toDo.id} boardId={boardId} id={toDo.id} text={toDo.text} />
-        ))}
-      </S.BoardContent>
+      <Droppable droppableId={boardId}>
+        {(provided, snapshot) => (
+          <S.BoardContent
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            isDraggingOver={snapshot.isDraggingOver}
+          >
+            {toDos.map((toDo, index) => (
+              <Task
+                key={toDo.id}
+                boardId={boardId}
+                id={toDo.id}
+                text={toDo.text}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </S.BoardContent>
+        )}
+      </Droppable>
     </S.Board>
   );
 };
 
-export default Board;
+export default memo(Board);

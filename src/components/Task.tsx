@@ -1,17 +1,19 @@
 import { Note } from './styles';
-import React from 'react';
+import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useSetRecoilState } from 'recoil';
 import { toDoState } from '../recoil/atoms';
+import { Draggable } from 'react-beautiful-dnd';
 
 interface TaskProps {
   id: number;
   text: string;
   boardId: string;
+  index: number;
 }
 
-const Task = ({ id, text, boardId }: TaskProps) => {
+const Task = ({ id, text, boardId, index }: TaskProps) => {
   const setToDos = useSetRecoilState(toDoState);
   const onClick = () => {
     if (window.confirm('This will remove this task from board')) {
@@ -24,13 +26,19 @@ const Task = ({ id, text, boardId }: TaskProps) => {
   };
 
   return (
-    <>
-      <Note>
-        <span>{text}</span>
-        <FontAwesomeIcon icon={faTrashCan} onClick={onClick} />
-      </Note>
-    </>
+    <Draggable draggableId={id + ''} index={index}>
+      {(provided) => (
+        <Note
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <span>{text}</span>
+          <FontAwesomeIcon icon={faTrashCan} onClick={onClick} />
+        </Note>
+      )}
+    </Draggable>
   );
 };
 
-export default Task;
+export default memo(Task);

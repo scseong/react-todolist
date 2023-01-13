@@ -3,10 +3,13 @@ import styled from 'styled-components';
 export const Board = styled.div`
   min-width: 355px;
   max-width: 355px;
-  min-height: 500px;
+  min-height: 600px;
+  max-height: 600px;
   border-radius: 6px;
-  background-color: #f6f8fa;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: ${(props) => props.theme.colors['board-bg']};
+  border: 1px solid ${(props) => props.theme.colors['board-border-bg']};
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BoardHeader = styled.div`
@@ -29,6 +32,8 @@ export const ItemCount = styled.span`
 export const Title = styled.h3`
   font-weight: bold;
   flex-grow: 2;
+  width: 10%;
+  word-wrap: break-word;
 `;
 
 export const HeaderBtn = styled.button`
@@ -41,22 +46,32 @@ export const HeaderBtn = styled.button`
   }
 `;
 
-export const BoardContent = styled.div`
-  padding: 0 10px;
+export const BoardContent = styled.div<{ isDraggingOver?: boolean }>`
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-grow: 2;
+  overflow-y: auto;
+  background-color: ${(props) =>
+    props?.isDraggingOver
+      ? props.theme.colors['board-dragging-bg']
+      : 'inherit'};
 `;
 
 export const FormContent = styled(BoardContent)`
+  overflow: hidden;
   padding: 12px 10px;
+  flex-grow: 0;
 `;
 export const FormBtn = styled.button<{ submit?: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   cursor: pointer;
   background-color: ${(props) =>
-    props.submit ? props.theme.colors['form-submit-btn-bg'] : 'inherit'};
+    props.submit
+      ? props.theme.colors['form-submit-btn-bg']
+      : props.theme.colors['form-btn-bg']};
   color: ${(props) => (props.submit ? 'white' : 'inherit')};
   &:hover {
     background-color: ${(props) =>
@@ -74,6 +89,7 @@ export const TaskForm = styled.div`
       resize: vertical;
       padding: 8px 12px;
       border-radius: 5px;
+      border: 1px solid ${(props) => props.theme.colors['card-border-bg']};
       &:focus {
         outline-color: ${(props) => props.theme.colors['border-outline']};
       }
@@ -96,11 +112,10 @@ export const TaskForm = styled.div`
 export const Note = styled.div`
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  border: 1px solid ${(props) => props.theme.colors['card-border-bg']};
+  background-color: ${(props) => props.theme.colors['card-bg']};
   display: flex;
   justify-content: space-between;
-  min-height: 80px;
   word-wrap: break-word;
   line-height: 1.5em;
   span {
@@ -108,7 +123,9 @@ export const Note = styled.div`
     height: fit-content;
   }
   svg {
-    width: 5%;
+    transform: translateY(4px);
+    width: 16px;
+    height: 16px;
     &:hover {
       color: ${(props) => props.theme.colors['btn-hover']};
     }
