@@ -7,10 +7,11 @@ export interface IToDo {
   text: string;
 }
 
-export interface IFormProps {
-  [boardId: string]: string;
-}
-
 export interface IForm {
   toDo: string;
+}
+
+export interface IAddTaskProps {
+  boardId: string;
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }

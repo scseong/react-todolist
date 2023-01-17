@@ -32,7 +32,7 @@ const Board = ({ boardId, toDos }: BoardProps) => {
       </S.BoardHeader>
       {isClicked && (
         <S.FormContent>
-          <AddTask boardId={boardId} />
+          <AddTask boardId={boardId} setIsClicked={setIsClicked} />
         </S.FormContent>
       )}
       <Droppable droppableId={boardId}>

@@ -1,12 +1,11 @@
-import { spawn } from 'child_process';
 import React, { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { IForm, IFormProps } from '../db';
+import { IForm, IAddTaskProps } from '../db';
 import { toDoState } from '../recoil/atoms';
 import { FormBtn, TaskForm } from './styles';
 
-const AddTask = ({ boardId }: IFormProps) => {
+const AddTask = ({ boardId, setIsClicked }: IAddTaskProps) => {
   const setToDos = useSetRecoilState(toDoState);
   const { register, handleSubmit, setFocus, resetField } = useForm<IForm>();
   const onSubmit = ({ toDo }: IForm) => {
@@ -18,6 +17,9 @@ const AddTask = ({ boardId }: IFormProps) => {
       return { ...allBoards, [boardId]: [...allBoards[boardId], newToDo] };
     });
     resetField('toDo');
+  };
+  const onCancleClick = () => {
+    setIsClicked((prev) => !prev);
   };
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const AddTask = ({ boardId }: IFormProps) => {
           <FormBtn type="submit" submit>
             Submit
           </FormBtn>
-          <FormBtn>Cancel</FormBtn>
+          <FormBtn onClick={onCancleClick}>Cancel</FormBtn>
         </div>
       </form>
     </TaskForm>
