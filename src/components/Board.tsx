@@ -4,13 +4,8 @@ import { faPlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import * as S from './styles';
 import Task from './Task';
 import AddTask from './AddTask';
-import { IToDo } from '../db';
 import { Droppable } from 'react-beautiful-dnd';
-
-interface BoardProps {
-  boardId: string;
-  toDos: IToDo[];
-}
+import { BoardProps } from '../db';
 
 const Board = ({ boardId, toDos }: BoardProps) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -40,7 +35,7 @@ const Board = ({ boardId, toDos }: BoardProps) => {
             ref={provided.innerRef}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {toDos.map((toDo, index) => (
+            {toDos?.map((toDo, index) => (
               <Task
                 key={toDo.id}
                 boardId={boardId}

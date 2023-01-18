@@ -7,12 +7,9 @@ const { persistAtom } = recoilPersist();
 export const toDoState = atom<IToDoState>({
   key: 'toDo',
   default: {
-    'To Do': [
-      { id: 0, text: 'Beautiful Dnd' },
-      { id: 1, text: 'Animations' },
-    ],
-    'In progress': [{ id: 2, text: 'Styling' }],
-    Done: [{ id: 3, text: 'Set up' }],
+    'To Do': [],
+    'In progress': [],
+    Done: [],
   },
   effects_UNSTABLE: [persistAtom],
 });

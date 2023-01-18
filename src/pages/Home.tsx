@@ -13,35 +13,39 @@ const Home = () => {
     if (source.droppableId === destination.droppableId) {
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
-        const taskObj = boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination.index, 0, ...taskObj);
-        return { ...allBoards, [source.droppableId]: [...boardCopy] };
+        const taskObj = boardCopy[source.index];
+        boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination?.index, 0, taskObj);
+        return { ...allBoards, [source.droppableId]: boardCopy };
       });
     } else {
       setToDos((allBoards) => {
-        const sourceCopy = [...allBoards[source.droppableId]];
-        const targetCopy = [...allBoards[destination.droppableId]];
-        const taskObj = sourceCopy.splice(source.index, 1);
-        targetCopy.splice(destination.index, 0, ...taskObj);
+        const sourceBoard = [...allBoards[source?.droppableId]];
+        const taskObj = sourceBoard[source.index];
+        const destinationBoard = [...allBoards[destination?.droppableId]];
+        sourceBoard.splice(source.index, 1);
+        destinationBoard.splice(destination?.index, 0, taskObj);
         return {
           ...allBoards,
-          [source.droppableId]: [...sourceCopy],
-          [destination.droppableId]: [...targetCopy],
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
         };
       });
     }
   };
 
   return (
-    <Container>
-      <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Container>
         <Boards>
-          {Object.keys(toDos).map((boardId) => (
-            <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
-          ))}
+          {Object.keys(toDos).map((boardId) => {
+            return (
+              <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
+            );
+          })}
         </Boards>
-      </DragDropContext>
-    </Container>
+      </Container>
+    </DragDropContext>
   );
 };
 

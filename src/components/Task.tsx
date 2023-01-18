@@ -5,13 +5,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useSetRecoilState } from 'recoil';
 import { toDoState } from '../recoil/atoms';
 import { Draggable } from 'react-beautiful-dnd';
-
-interface TaskProps {
-  id: number;
-  text: string;
-  boardId: string;
-  index: number;
-}
+import { TaskProps } from '../db';
 
 const Task = ({ id, text, boardId, index }: TaskProps) => {
   const setToDos = useSetRecoilState(toDoState);
