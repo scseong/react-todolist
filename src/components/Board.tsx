@@ -14,7 +14,7 @@ interface BoardProps {
 
 const Board = ({ boardId, toDos }: BoardProps) => {
   const [isClicked, setIsClicked] = useState(false);
-  const onClickPlusBtn = () => {
+  const toggleClickedBtn = () => {
     setIsClicked((prev) => !prev);
   };
 
@@ -24,16 +24,14 @@ const Board = ({ boardId, toDos }: BoardProps) => {
         <S.ItemCount>{toDos.length}</S.ItemCount>
         <S.Title>{boardId}</S.Title>
         <S.HeaderBtn>
-          <FontAwesomeIcon icon={faPlus} onClick={onClickPlusBtn} />
+          <FontAwesomeIcon icon={faPlus} onClick={toggleClickedBtn} />
         </S.HeaderBtn>
         <S.HeaderBtn>
           <FontAwesomeIcon icon={faEllipsis} />
         </S.HeaderBtn>
       </S.BoardHeader>
       {isClicked && (
-        <S.FormContent>
-          <AddTask boardId={boardId} setIsClicked={setIsClicked} />
-        </S.FormContent>
+        <AddTask boardId={boardId} toggleClickedBtn={toggleClickedBtn} />
       )}
       <Droppable droppableId={boardId}>
         {(provided, snapshot) => (

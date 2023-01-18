@@ -11,7 +11,11 @@ export interface IForm {
   toDo: string;
 }
 
+interface toggleFunc {
+  (): void;
+}
+
 export interface IAddTaskProps {
   boardId: string;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleClickedBtn: toggleFunc;
 }

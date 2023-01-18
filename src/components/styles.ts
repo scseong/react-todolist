@@ -51,19 +51,14 @@ export const BoardContent = styled.div<{ isDraggingOver?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex-grow: 2;
-  overflow-y: auto;
+  overflow-x: hidden;
   background-color: ${(props) =>
     props?.isDraggingOver
       ? props.theme.colors['board-dragging-bg']
       : 'inherit'};
+  flex-grow: 2;
 `;
 
-export const FormContent = styled(BoardContent)`
-  overflow: hidden;
-  padding: 12px 10px;
-  flex-grow: 0;
-`;
 export const FormBtn = styled.button<{ submit?: boolean }>`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -82,11 +77,13 @@ export const FormBtn = styled.button<{ submit?: boolean }>`
 `;
 
 export const TaskForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2px 10px;
   form {
-    display: flex;
-    flex-direction: column;
     textarea {
       resize: vertical;
+      width: 100%;
       padding: 8px 12px;
       border-radius: 5px;
       border: 1px solid ${(props) => props.theme.colors['card-border-bg']};
@@ -109,10 +106,13 @@ export const TaskForm = styled.div`
   }
 `;
 
-export const Note = styled.div`
-  padding: 8px;
+export const Note = styled.div<{ isDraggingOver: boolean }>`
+  padding: 12px;
   border-radius: 5px;
-  border: 1px solid ${(props) => props.theme.colors['card-border-bg']};
+  border: ${(props) =>
+    props.isDraggingOver
+      ? `2px solid ${props.theme.colors['border-outline']}`
+      : `1px solid ${props.theme.colors['card-border-bg']}`};
   background-color: ${(props) => props.theme.colors['card-bg']};
   display: flex;
   justify-content: space-between;

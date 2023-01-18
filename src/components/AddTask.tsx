@@ -5,7 +5,7 @@ import { IForm, IAddTaskProps } from '../db';
 import { toDoState } from '../recoil/atoms';
 import { FormBtn, TaskForm } from './styles';
 
-const AddTask = ({ boardId, setIsClicked }: IAddTaskProps) => {
+const AddTask = ({ boardId, toggleClickedBtn }: IAddTaskProps) => {
   const setToDos = useSetRecoilState(toDoState);
   const { register, handleSubmit, setFocus, resetField } = useForm<IForm>();
   const onSubmit = ({ toDo }: IForm) => {
@@ -19,7 +19,7 @@ const AddTask = ({ boardId, setIsClicked }: IAddTaskProps) => {
     resetField('toDo');
   };
   const onCancleClick = () => {
-    setIsClicked((prev) => !prev);
+    toggleClickedBtn();
   };
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const AddTask = ({ boardId, setIsClicked }: IAddTaskProps) => {
     <TaskForm>
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          {...register('toDo', { required: true, maxLength: 150 })}
+          {...register('toDo', { required: true })}
           placeholder="Add a task"
           rows={5}
         />

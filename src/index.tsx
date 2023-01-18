@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
-import Router from './Router';
+import App from './App';
+import GlobalStyles from './styles/GlobalStyles';
 import { myTheme } from './styles/theme';
 
 const root = ReactDOM.createRoot(
@@ -12,7 +12,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={myTheme}>
     <RecoilRoot>
-      <RouterProvider router={Router} />
+      <GlobalStyles />
+      <App />
     </RecoilRoot>
   </ThemeProvider>,
 );

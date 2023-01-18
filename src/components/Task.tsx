@@ -27,8 +27,9 @@ const Task = ({ id, text, boardId, index }: TaskProps) => {
 
   return (
     <Draggable draggableId={id + ''} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <Note
+          isDraggingOver={snapshot.isDragging}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
