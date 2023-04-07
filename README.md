@@ -22,7 +22,7 @@
 
 - **React-beautiful-dnd** | 간단하게 드래그 앤 드롭 기능을 지원합니다.
 
-## Functions
+## Features
 
 - 작업을 특정 카테고리로 나누어 보기
   
